@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TKa-H5-fNZ">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Location Config View Controller-->
+        <scene sceneID="UKB-MK-5uQ">
+            <objects>
+                <viewController id="TKa-H5-fNZ" customClass="LocationConfigViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZmB-ct-fxK"/>
+                        <viewControllerLayoutGuide type="bottom" id="N5L-7H-WDf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NbN-45-ePL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Weather App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRd-Bd-1sI">
+                                <rect key="frame" x="91.5" y="307.5" width="137" height="24"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" red="0.99194461107254028" green="0.99615627527236938" blue="0.99600595235824585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="g9v-IE-DUm">
+                                <rect key="frame" x="79" y="180.5" width="162" height="119"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jA7-AP-jeh">
+                                <rect key="frame" x="222" y="401" width="37" height="36"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" red="0.99194461107254028" green="0.99615627527236938" blue="0.99600595235824585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="checkLocation:" destination="TKa-H5-fNZ" eventType="touchUpInside" id="f53-Nx-aJv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZRd-Bd-1sI" firstAttribute="top" secondItem="g9v-IE-DUm" secondAttribute="bottom" constant="8" id="Cu8-vg-uRV"/>
+                            <constraint firstItem="N5L-7H-WDf" firstAttribute="top" secondItem="jA7-AP-jeh" secondAttribute="bottom" constant="43" id="HC9-Zq-Fye"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="g9v-IE-DUm" secondAttribute="trailing" constant="63" id="L8F-1N-WyN"/>
+                            <constraint firstItem="ZRd-Bd-1sI" firstAttribute="centerX" secondItem="NbN-45-ePL" secondAttribute="centerX" id="P0H-li-lRj"/>
+                            <constraint firstItem="g9v-IE-DUm" firstAttribute="centerX" secondItem="NbN-45-ePL" secondAttribute="centerX" id="PMR-2i-dfc"/>
+                            <constraint firstAttribute="trailing" secondItem="jA7-AP-jeh" secondAttribute="trailing" constant="61" id="Zke-ij-7ZK"/>
+                            <constraint firstItem="g9v-IE-DUm" firstAttribute="leading" secondItem="NbN-45-ePL" secondAttribute="leadingMargin" constant="63" id="ixS-gU-0WW"/>
+                            <constraint firstItem="g9v-IE-DUm" firstAttribute="centerY" secondItem="NbN-45-ePL" secondAttribute="centerY" id="quz-CA-oLb"/>
+                            <constraint firstItem="ZRd-Bd-1sI" firstAttribute="centerY" secondItem="NbN-45-ePL" secondAttribute="centerY" constant="79.5" id="s15-N9-qgc"/>
+                            <constraint firstItem="jA7-AP-jeh" firstAttribute="leading" secondItem="ZRd-Bd-1sI" secondAttribute="trailing" constant="-6.5" id="zki-wN-vCK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="checkLocationOutlet" destination="jA7-AP-jeh" id="Lr7-n1-fWZ"/>
+                        <segue destination="aAp-Tp-wbr" kind="show" identifier="locationConfigID" id="bFx-6K-crF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hBg-Zv-Nuz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-412.5" y="-701.25"/>
+        </scene>
+        <!--Enter Location View Controller-->
+        <scene sceneID="OKv-do-7fn">
+            <objects>
+                <viewController storyboardIdentifier="enterLocationStroyBrdID" id="aAp-Tp-wbr" customClass="EnterLocationViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j0O-WT-CYU"/>
+                        <viewControllerLayoutGuide type="bottom" id="mc4-GG-B2x"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uMY-3t-a2i">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTj-Ui-i8h" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O4Z-pq-dvC">
+                                <rect key="frame" x="10" y="302" width="300" height="168"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7WT-ak-CSi" customClass="WeatherButton" customModule="WeatherApp" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="86" width="280" height="36"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="usersSavedLocationNoOne:" destination="aAp-Tp-wbr" eventType="touchUpInside" id="SMT-KD-CtX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xoG-Gz-9xs" customClass="WeatherButton" customModule="WeatherApp" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="45" width="280" height="36"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" title="Use current location">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="usersCurrentLocation:" destination="aAp-Tp-wbr" eventType="touchUpInside" id="kcP-Ya-cEd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7t-Dl-VmW" customClass="WeatherButton" customModule="WeatherApp" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="127" width="280" height="36"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="usersSavedLocationNoTwo:" destination="aAp-Tp-wbr" eventType="touchUpInside" id="kyX-FE-if2"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Search location" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CHT-mt-tI2">
+                                        <rect key="frame" x="10" y="4" width="280" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="rWw-kn-lPZ"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                                                <color key="value" red="0.72523397842639592" green="0.72523397842639592" blue="0.72523397842639592" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQc-zF-4w9">
+                                        <rect key="frame" x="239" y="6" width="51" height="34"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButtonAction:" destination="aAp-Tp-wbr" eventType="touchUpInside" id="sn5-5N-TJG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.58452662678163159" green="0.78617300415540481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="MQc-zF-4w9" firstAttribute="leading" secondItem="CHT-mt-tI2" secondAttribute="trailing" constant="-51" id="970-Dz-xpx"/>
+                                    <constraint firstAttribute="height" constant="168" id="IXn-iE-wnF"/>
+                                    <constraint firstItem="CHT-mt-tI2" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="Jr5-Lh-5X5"/>
+                                    <constraint firstItem="CHT-mt-tI2" firstAttribute="top" secondItem="O4Z-pq-dvC" secondAttribute="top" constant="4" id="OdZ-cM-mvj"/>
+                                    <constraint firstAttribute="trailing" secondItem="7WT-ak-CSi" secondAttribute="trailing" constant="10" id="PkK-rz-h4A"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y7t-Dl-VmW" secondAttribute="bottom" constant="5" id="Q7E-bm-7yd"/>
+                                    <constraint firstItem="xoG-Gz-9xs" firstAttribute="top" secondItem="CHT-mt-tI2" secondAttribute="bottom" constant="5" id="QL0-m7-4bv"/>
+                                    <constraint firstItem="Y7t-Dl-VmW" firstAttribute="top" secondItem="7WT-ak-CSi" secondAttribute="bottom" constant="5" id="RDI-Jy-7PS"/>
+                                    <constraint firstItem="xoG-Gz-9xs" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="VXY-lt-kxf"/>
+                                    <constraint firstAttribute="trailing" secondItem="CHT-mt-tI2" secondAttribute="trailing" constant="10" id="aaM-hv-Od8"/>
+                                    <constraint firstItem="7WT-ak-CSi" firstAttribute="top" secondItem="xoG-Gz-9xs" secondAttribute="bottom" constant="5" id="dKd-37-xeY"/>
+                                    <constraint firstItem="Y7t-Dl-VmW" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="fwI-Mf-uig"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y7t-Dl-VmW" secondAttribute="trailing" constant="10" id="jb4-Vd-cfl"/>
+                                    <constraint firstAttribute="trailing" secondItem="xoG-Gz-9xs" secondAttribute="trailing" constant="10" id="jmM-2o-7q9"/>
+                                    <constraint firstAttribute="trailing" secondItem="MQc-zF-4w9" secondAttribute="trailing" constant="10" id="obP-3V-Gdy"/>
+                                    <constraint firstItem="MQc-zF-4w9" firstAttribute="top" secondItem="O4Z-pq-dvC" secondAttribute="top" constant="6" id="wiB-ih-cUb"/>
+                                    <constraint firstItem="7WT-ak-CSi" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="wtO-A8-R8a"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="O4Z-pq-dvC" secondAttribute="trailing" constant="10" id="B8i-96-ys7"/>
+                            <constraint firstAttribute="trailing" secondItem="sTj-Ui-i8h" secondAttribute="trailing" id="HAA-48-ewt"/>
+                            <constraint firstItem="sTj-Ui-i8h" firstAttribute="leading" secondItem="uMY-3t-a2i" secondAttribute="leading" id="T62-J7-cpr"/>
+                            <constraint firstItem="mc4-GG-B2x" firstAttribute="top" secondItem="O4Z-pq-dvC" secondAttribute="bottom" constant="10" id="WO6-fw-4oM"/>
+                            <constraint firstItem="sTj-Ui-i8h" firstAttribute="top" secondItem="uMY-3t-a2i" secondAttribute="top" id="abF-8E-Sbs"/>
+                            <constraint firstItem="mc4-GG-B2x" firstAttribute="top" secondItem="sTj-Ui-i8h" secondAttribute="bottom" id="hIG-vn-oMg"/>
+                            <constraint firstItem="O4Z-pq-dvC" firstAttribute="leading" secondItem="uMY-3t-a2i" secondAttribute="leading" constant="10" id="oOY-2A-K83"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="blueBackgroundView" destination="O4Z-pq-dvC" id="9BV-O9-947"/>
+                        <outlet property="cancelButtonOutlet" destination="MQc-zF-4w9" id="TDr-aW-aGb"/>
+                        <outlet property="lcationMapView" destination="sTj-Ui-i8h" id="Jnb-xr-z74"/>
+                        <outlet property="searchButtonOne" destination="7WT-ak-CSi" id="0Ep-XC-tCe"/>
+                        <outlet property="searchButtonTwo" destination="Y7t-Dl-VmW" id="oJE-8k-g4O"/>
+                        <outlet property="searchDisplayController" destination="x8f-Mg-mTZ" id="xVK-Mz-9I0"/>
+                        <outlet property="userEnteredLocation" destination="CHT-mt-tI2" id="L6o-y5-nrb"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="showWeatherID" id="LPP-Ro-BZI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TzC-yV-xP1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="x8f-Mg-mTZ">
+                    <connections>
+                        <outlet property="delegate" destination="aAp-Tp-wbr" id="LPN-zR-4yL"/>
+                        <outlet property="searchContentsController" destination="aAp-Tp-wbr" id="oOS-QM-Es9"/>
+                        <outlet property="searchResultsDataSource" destination="aAp-Tp-wbr" id="wrc-QI-rAn"/>
+                        <outlet property="searchResultsDelegate" destination="aAp-Tp-wbr" id="LFo-Jg-ehT"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="322.5" y="-702.5"/>
+        </scene>
+        <!--The Weather App-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="weatherVController" id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sea" translatesAutoresizingMaskIntoConstraints="NO" id="sVX-rY-0Yg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zer-hN-v9G" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2Y-N1-CeB">
+                                <rect key="frame" x="40" y="50" width="200" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Search another location">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchAgain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y4Z-3s-agm"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f0N-kO-a4h">
+                                <rect key="frame" x="0.0" y="253" width="320" height="216"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="1KY-Yb-FD0"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="80" minimumInteritemSpacing="175" id="bIe-3L-0Fj">
+                                    <size key="itemSize" width="200" height="184"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="40" minY="0.0" maxX="40" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="sDf-lE-c4t" customClass="Cell">
+                                        <rect key="frame" x="40" y="16" width="200" height="184"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="184"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="hOW-kq-chN"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xUo-XW-Td7"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zer-hN-v9G" secondAttribute="trailing" id="E2X-lS-rbD"/>
+                            <constraint firstItem="zer-hN-v9G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NXr-jM-vZp"/>
+                            <constraint firstAttribute="trailing" secondItem="f0N-kO-a4h" secondAttribute="trailing" id="kc1-Y2-Heq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zer-hN-v9G" secondAttribute="bottom" id="kz6-Q4-vFP"/>
+                            <constraint firstItem="zer-hN-v9G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qLf-l4-4cL"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="f0N-kO-a4h" secondAttribute="bottom" constant="11" id="t4L-X8-E8E"/>
+                            <constraint firstItem="f0N-kO-a4h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uk6-fB-bPc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="The Weather App" largeTitleDisplayMode="never" id="Rjj-Pe-cu5"/>
+                    <connections>
+                        <outlet property="backgroundView" destination="zer-hN-v9G" id="R0f-xg-Ng3"/>
+                        <outlet property="collectionView" destination="f0N-kO-a4h" id="IX4-aR-dTW"/>
+                        <outlet property="searchButton" destination="r2Y-N1-CeB" id="rt0-GX-Lnk"/>
+                        <segue destination="aAp-Tp-wbr" kind="show" identifier="searchAgainSegueID" id="Bzs-f7-ARF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1061.5999999999999" y="-700.29985007496259"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KSs-5n-xzz">
+            <objects>
+                <navigationController storyboardIdentifier="weatherNavigationID" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Qwf-4D-BW0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9mA-1d-UON">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="sdP-Mh-bb8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="357-zQ-4uZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1063" y="-1405"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="183" height="119"/>
+        <image name="sea" width="1224" height="1632"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="sdP-Mh-bb8"/>
+        <segue reference="Bzs-f7-ARF"/>
+    </inferredMetricsTieBreakers>
+</document>

@@ -1,0 +1,31 @@
+PODS:
+  - GoogleMaps (2.5.0):
+    - GoogleMaps/Maps (= 2.5.0)
+  - GoogleMaps/Base (2.5.0)
+  - GoogleMaps/Maps (2.5.0):
+    - GoogleMaps/Base
+  - GooglePlacePicker (2.5.0):
+    - GoogleMaps (= 2.5.0)
+    - GooglePlaces (= 2.5.0)
+  - GooglePlaces (2.5.0):
+    - GoogleMaps/Base (= 2.5.0)
+  - ScalingCarousel (2.0.2)
+  - SwiftLint (0.24.0)
+
+DEPENDENCIES:
+  - GoogleMaps (= 2.5)
+  - GooglePlacePicker
+  - GooglePlaces
+  - ScalingCarousel
+  - SwiftLint
+
+SPEC CHECKSUMS:
+  GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
+  GooglePlacePicker: 1573e644ab54564d95c2643edc0f29091609e966
+  GooglePlaces: dd70d9d71ea1c7944846afe67de3712c99b30a77
+  ScalingCarousel: 5538c80dd209d3d5439be68b145272dd8b9b319a
+  SwiftLint: a014c92b4664e8b13f380f8640a51bb1733778ba
+
+PODFILE CHECKSUM: b4ec5c2aadbd75f99a49f707e773d896abc9a4ae
+
+COCOAPODS: 1.3.1
