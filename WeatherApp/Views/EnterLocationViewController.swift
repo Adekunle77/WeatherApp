@@ -91,7 +91,7 @@ func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
 func textFieldDidBeginEditing(_ textField: UITextField) {
     UIView.animate(withDuration: 0.4, animations: {
-    self.blueBackgroundView.frame.origin.y -= 200
+    self.blueBackgroundView.frame.origin.y -= 230
     self.cancelButtonOutlet.frame.origin.x = 280
     self.userEnteredLocation.frame = CGRect(x: 15, y: 16, width: 266, height: 35)
     })
@@ -170,7 +170,7 @@ func searchKeyTriggered() {
 
 @IBAction func usersSavedLocationNoOne(_ sender: UIButton) {
     if searchButtonOne.currentTitle == "No saved searches" {
-         self.alertView(title: "Sorry!", message: "There are no saved searches.")
+        print("do something")
     } else {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(revievedSavedLocation[0]) { (placemarks, _) in
@@ -204,7 +204,6 @@ func searchKeyTriggered() {
 
 @IBAction func usersSavedLocationNoTwo(_ sender: UIButton) {
     if searchButtonOne.currentTitle == "No saved searches" {
-    self.alertView(title: "Sorry!", message: "There are no saved searches.")
         print("do something")
     } else {
         let geocoder = CLGeocoder()
@@ -216,7 +215,7 @@ func searchKeyTriggered() {
                 print("Sorry this address is unknown")
             } else {
                 let latLong = lat + "," + long
-
+                print(" this is \(latLong)")
                 let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "weatherVController") as! ViewController
                 secondVC.usersLocation = latLong
                 secondVC.userLatitude = lat

@@ -11,7 +11,7 @@ import Foundation
 class WeatherManager {
     static let shared = WeatherManager()
     
-    func weatherFromJsonUrl(withLocation userLocation: String, completion: @escaping ([WeatherModel]) -> Void) {
+    func weatherFromJsonUrl(withLocation userLocation: String, completion: @escaping ([WeathersModel]) -> Void) {
 
     let darkSkyUrl = "https://api.darksky.net/forecast/b4821eebc02a87aac50443248fe7b3a9/"
 
@@ -19,35 +19,22 @@ class WeatherManager {
 
     let request = URLRequest(url: URL(string: url)!)
 
-        let task = URLSession.shared.dataTask(with: request) {(data: Data?, _: URLResponse?, error: Error?) in
+    let task = URLSession.shared.dataTask(with: request) {(data: Data?, _: URLResponse?, error: Error?) in
+    
+    var weathersArray: [WeathersModel] = []
 
-            var weatherArray: [WeatherModel] = []
+    if let data = data {
 
-            if let data = data {
-
-                do {
-
-                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                        if let dailyWeather = json["daily"] as? [String: Any] {
-                            if let dailyData = dailyWeather["data"] as? [[String: Any]] {
-                                for dataPoint in dailyData {
-                                    if let weatherObject = try? WeatherModel(json: dataPoint) {
-                                        weatherArray.append(weatherObject)
-                                    }
-
-                                }
-                            }
-
-                        }
-
-                    }
-
-                } catch {
+        do {
+            let responseRoot = try JSONDecoder().decode(ResponseRoot.self, from: data)
+            // Then you have access to your array of model objects :)
+            let weatherModelss = responseRoot.daily.data
+            weathersArray = weatherModelss
+            }catch {
                     print(error.localizedDescription)
-                }
-                completion(weatherArray)
+                    }
+            completion(weathersArray)
             }
-
         }
         task.resume()
     }

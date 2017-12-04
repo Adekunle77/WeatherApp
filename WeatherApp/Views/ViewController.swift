@@ -21,7 +21,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak private var searchButton: UIButton!
     private let userManger = CLLocationManager()
     private let gradientLayer = CAGradientLayer()
-    private var weatherForecast = [WeatherModel]()
+    private var weatherForecast = [WeathersModel]()
     private var dateNTime = Timer()
     private var locationFromSearchBar = "New York"
     private var enteredLatLong: String?
@@ -41,6 +41,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+   
         
         savedData()
         getLatLong(latLongAddressFromUser: locationFromSearchBar)
@@ -113,7 +115,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         self.currentLat = String(location.coordinate.latitude)
         self.currentLong = String(location.coordinate.longitude)
 
-        WeatherManager.shared.weatherFromJsonUrl(withLocation: self.usersLocation!) {(results: [WeatherModel]?) in
+        WeatherManager.shared.weatherFromJsonUrl(withLocation: self.usersLocation!) {(results: [WeathersModel]?) in
             if let fetachedWeather = results {
                 self.weatherForecast = fetachedWeather
                 DispatchQueue.main.async {
