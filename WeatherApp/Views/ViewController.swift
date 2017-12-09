@@ -65,7 +65,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         gradientLayer.frame = self.view.frame
         gradientLayer.colors = [UIColor.weatherLightBlue.cgColor, UIColor.weatherDarkBlue.cgColor]
        //  setting the background view with google maps
-        let camera = GMSCameraPosition.camera(withLatitude: Double(self.userLatitude!)!, longitude: Double(self.userLongitude!)!, zoom: 15.0)
+        
+        let camera = GMSCameraPosition.camera(withLatitude: Double(userLatitude!)!, longitude: Double(userLongitude!)!, zoom: 15.0)
         let marker = GMSMarker()
         marker.position = camera.target
 
@@ -74,19 +75,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     func savedData() {
-        let appDel = UIApplication.shared.delegate as! AppDelegate
+        guard let appDel = UIApplication.shared.delegate as? AppDelegate else {return}
         let context = appDel.persistentContainer.viewContext
 
         do {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Locations")
             let results = try context.fetch(request)
-
+            
             if results.count > 0 {
-                for item in results as! [NSManagedObject] {
-                    let name = item.value(forKey: "address")
-                    savedSearches.insert(name as! String, at: 0)
+                for item in results {
+                    if let itemsInResults = item as? NSManagedObject {
+                      if let name = itemsInResults.value(forKey: "address") as? String {
+                      //  print(name, "number 1")
+                        savedSearches.insert(name, at: 0)
+                        }
+                    }
                 }
             }
+            
+
+//            if results.count > 0 {
+//                for item in results as! [NSManagedObject] {
+//                    if let name = item.value(forKey: "address") as? String {
+//                    //print(name, "number 2")
+//                        savedSearches.insert(name, at: 0)
+//                    }
+//                }
+//            }
         } catch {
             print("there are issues")
         }
@@ -166,6 +181,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let weatherTwo = weather[indexPath.item]
         let date = Calendar.current.date(byAdding: .day, value: indexPath.item, to: Date())
         
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //WARNING FORCED UNWRAPPED BELOW//
+        
         cell.dateTime.text = dateFormatter.string(from: date!)
         cell.update(with: weatherTwo)
         cell.layer.cornerRadius = 20.0
@@ -174,7 +192,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchAgainSegueID" {
-            let searchAgainVC: EnterLocationViewController = segue.destination as! EnterLocationViewController
+            guard let searchAgainVC: EnterLocationViewController = segue.destination as? EnterLocationViewController else {return}
             searchAgainVC.userLatitude = currentLat
             searchAgainVC.userLongitude = currentLong
             searchAgainVC.revievedSavedLocation = self.savedSearches

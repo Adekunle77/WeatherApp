@@ -18,8 +18,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak private var temperatureLabel: UILabel!
     @IBOutlet weak private var cellBackgroundView: WeatherCollectionViewCell!
 
- //  var weatherFromJSON: WeatherSModel?
-   // var indexPath: IndexPath!
 
     override func awakeFromNib() {
         super.awakeFromNib()

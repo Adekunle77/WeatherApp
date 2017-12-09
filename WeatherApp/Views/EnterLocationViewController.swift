@@ -16,12 +16,13 @@ import GoogleMaps
 
 class EnterLocationViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak private var scrollView: UIScrollView!
     @IBOutlet weak private var cancelButtonOutlet: UIButton!
     @IBOutlet weak private var searchButtonOne: UIButton!
     @IBOutlet weak private var searchButtonTwo: UIButton!
     @IBOutlet weak private var blueBackgroundView: UIView!
     @IBOutlet weak private var whatLocationLabel: UILabel!
-    @IBOutlet weak private var lcationMapView: GMSMapView!
+    @IBOutlet weak private var locationMapView: GMSMapView!
     @IBOutlet weak private var searchButtonOutlet: UIButton!
     @IBOutlet weak private var userEnteredLocation: UITextField!
     @IBOutlet weak private var useCurrentLocationOutlet: UILabel!
@@ -71,48 +72,56 @@ class EnterLocationViewController: UIViewController, CLLocationManagerDelegate, 
 
         // setting the background view with google maps
         DispatchQueue.main.async {
-        let camera = GMSCameraPosition.camera(withLatitude: Double(self.userLatitude)!, longitude: Double(self.userLongitude)!, zoom: 15.0)
+        
+        guard let latitude = Double(self.userLatitude) else {return}
+        guard let longitude = Double(self.userLongitude) else {return}
+        
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 15.0)
+            
         let marker = GMSMarker()
         marker.position = camera.target
         marker.appearAnimation = .pop
 
         marker.title = self.address
         marker.snippet = self.area
-        marker.map = self.lcationMapView
-        self.lcationMapView.moveCamera(GMSCameraUpdate.setCamera(camera))
+        marker.map = self.locationMapView
+        self.locationMapView.moveCamera(GMSCameraUpdate.setCamera(camera))
     }
 }
 
 func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     searchKeyTriggered()
+    self.scrollView.contentOffset.y = -200
     textField.resignFirstResponder()
     return true
 }
-
+   
+    
 func textFieldDidBeginEditing(_ textField: UITextField) {
+
     UIView.animate(withDuration: 0.4, animations: {
-    self.blueBackgroundView.frame.origin.y -= 230
+    self.scrollView.contentOffset.y = 220
     self.cancelButtonOutlet.frame.origin.x = 280
     self.userEnteredLocation.frame = CGRect(x: 15, y: 16, width: 266, height: 35)
     })
 }
 
 func textFieldDidEndEditing(_ textField: UITextField) {
-    self.blueBackgroundView.frame.origin.y = 425
+    self.scrollView.contentOffset.y = -200
     textField.resignFirstResponder()
 }
 
-    func alertView(title: String, message: String) {
-        let title = title
-        let message = message
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        self.present(alertController, animated: true, completion: nil)
-        
-        let defaultAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(defaultAction)
-    }
+func alertView(title: String, message: String) {
+    let title = title
+    let message = message
     
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    self.present(alertController, animated: true, completion: nil)
+    
+    let defaultAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    alertController.addAction(defaultAction)
+}
+
 
 @IBAction func cancelButtonAction(_ sender: UIButton) {
     UIView.animate(withDuration: 0.4, animations: {
@@ -145,7 +154,6 @@ func searchKeyTriggered() {
             newLocation.setValue(self.userEnteredLocation.text, forKey: "address")
             do {
                 try context.save()
-
             } catch {
                 print("It did not save")
             }
@@ -236,6 +244,7 @@ func searchKeyTriggered() {
 
 @IBAction func usersCurrentLocation(_ sender: Any) {
          let userLocation = self.userLatitude + "," + "" + self.userLongitude
+    
         if let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "weatherVController") as? ViewController {
         
         secondVC.usersLocation =  userLocation

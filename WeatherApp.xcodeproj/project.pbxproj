@@ -14,7 +14,6 @@
 		33CB41881FBF57D400B0D43E /* WeatherApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33CB41861FBF57D300B0D43E /* WeatherApp.xcdatamodeld */; };
 		33CB418A1FBF57F800B0D43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CB41891FBF57F800B0D43E /* AppDelegate.swift */; };
 		33CB418C1FBF580200B0D43E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CB418B1FBF580200B0D43E /* Assets.xcassets */; };
-		33CB41901FBF586600B0D43E /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CB418F1FBF586600B0D43E /* UserLocation.swift */; };
 		33CB41981FBF587000B0D43E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CB41931FBF587000B0D43E /* Reachability.swift */; };
 		33CB41991FBF587000B0D43E /* TABUIColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CB41941FBF587000B0D43E /* TABUIColours.swift */; };
 		33CB419A1FBF587000B0D43E /* WeatherButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CB41951FBF587000B0D43E /* WeatherButton.swift */; };
@@ -35,7 +34,6 @@
 		33CB41891FBF57F800B0D43E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33CB418B1FBF580200B0D43E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33CB418D1FBF585D00B0D43E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		33CB418F1FBF586600B0D43E /* UserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		33CB41931FBF587000B0D43E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		33CB41941FBF587000B0D43E /* TABUIColours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TABUIColours.swift; sourceTree = "<group>"; };
 		33CB41951FBF587000B0D43E /* WeatherButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherButton.swift; sourceTree = "<group>"; };
@@ -92,6 +90,8 @@
 		331DE5AB1FC08C410018CA51 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				33CB41951FBF587000B0D43E /* WeatherButton.swift */,
+				33CB41941FBF587000B0D43E /* TABUIColours.swift */,
 				33CB418D1FBF585D00B0D43E /* Info.plist */,
 				33CB418B1FBF580200B0D43E /* Assets.xcassets */,
 				33CB41891FBF57F800B0D43E /* AppDelegate.swift */,
@@ -117,11 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				331D4DE51FD57D570022D4A4 /* WeatherManager.swift */,
-				33CB41931FBF587000B0D43E /* Reachability.swift */,
 				336BE6481FD1B96A00E8E28D /* WeathersModel.swift */,
-				33CB41941FBF587000B0D43E /* TABUIColours.swift */,
-				33CB418F1FBF586600B0D43E /* UserLocation.swift */,
-				33CB41951FBF587000B0D43E /* WeatherButton.swift */,
+				33CB41931FBF587000B0D43E /* Reachability.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -279,7 +276,6 @@
 			files = (
 				331DE5AE1FC08ED80018CA51 /* Info.plist in Sources */,
 				33CB419F1FBF587A00B0D43E /* WeatherCollectionViewCell.swift in Sources */,
-				33CB41901FBF586600B0D43E /* UserLocation.swift in Sources */,
 				33CB418A1FBF57F800B0D43E /* AppDelegate.swift in Sources */,
 				33CB41A11FBF587A00B0D43E /* LocationConfigViewController.swift in Sources */,
 				33CB419A1FBF587000B0D43E /* WeatherButton.swift in Sources */,

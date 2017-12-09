@@ -34,6 +34,7 @@ class LocationConfigViewController: UIViewController, CLLocationManagerDelegate 
         coreLocationManager.requestWhenInUseAuthorization()
         coreLocationManager.startUpdatingLocation()
         self.view.backgroundColor = UIColor.weatherBlue
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -124,13 +125,19 @@ func locationManager(_ coreLocationManager: CLLocationManager, didUpdateLocation
         self.coreLocationManager.stopUpdatingLocation()
     }
     
-    CLGeocoder().reverseGeocodeLocation(coreLocationManager.location!, completionHandler: {(placemarks, error) -> Void in
+    guard let reverseGeocodeLocation = coreLocationManager.location else {return}
+    
+    CLGeocoder().reverseGeocodeLocation(reverseGeocodeLocation, completionHandler: {(placemarks, error) -> Void in
+        
         if (error != nil) {
-          print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+            print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+            
             return
         }
-            if (placemarks?.count)! > 0 {
-                let pm = placemarks?[0]
+        guard let addressLocation = placemarks else {return}
+        
+        if addressLocation.count > 0 {
+                let pm = addressLocation[0]
                 self.displayLocationInfo(pm)
             } else {
                 print("Problem with the data received from geocoder")
@@ -213,7 +220,7 @@ func displayLocationInfo(_ placemark: CLPlacemark?) {
     
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "locationConfigID" {
-            let enterLocationVC: EnterLocationViewController = segue.destination as! EnterLocationViewController
+            guard let enterLocationVC: EnterLocationViewController = segue.destination as? EnterLocationViewController else {return}
             enterLocationVC.revievedSavedLocation = address
             enterLocationVC.userLatitude = self.userLat
             enterLocationVC.userLongitude = self.userLong

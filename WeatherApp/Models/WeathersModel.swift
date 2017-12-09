@@ -14,7 +14,9 @@ struct WeathersModel: Codable {
     let temperatureMax: Double
 }
 struct ResponseRoot: Decodable {
-    let daily: Daily; struct Daily: Decodable {
-        let data: [WeathersModel]
-    }
+    let daily: Daily
+}
+
+struct Daily: Decodable {
+    let data: [WeathersModel]
 }
