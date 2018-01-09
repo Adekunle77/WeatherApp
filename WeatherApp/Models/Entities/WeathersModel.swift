@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 struct WeathersModel: Codable {
     let summary: String
     let icon: String
@@ -16,7 +15,6 @@ struct WeathersModel: Codable {
 struct ResponseRoot: Decodable {
     let daily: Daily
 }
-
 struct Daily: Decodable {
     let data: [WeathersModel]
 }

@@ -14,20 +14,15 @@ class WeatherManager {
     func weatherFromJsonUrl(withLocation userLocation: String, completion: @escaping ([WeathersModel]) -> Void) {
 
     let darkSkyUrl = "https://api.darksky.net/forecast/b4821eebc02a87aac50443248fe7b3a9/"
-
     let url = darkSkyUrl + userLocation
-
     let request = URLRequest(url: URL(string: url)!)
-
     let task = URLSession.shared.dataTask(with: request) {(data: Data?, _: URLResponse?, error: Error?) in
-    
     var weathersArray: [WeathersModel] = []
 
     if let data = data {
 
         do {
             let responseRoot = try JSONDecoder().decode(ResponseRoot.self, from: data)
-            // Then you have access to your array of model objects :)
             let weatherModelss = responseRoot.daily.data
             weathersArray = weatherModelss
             }catch {
