@@ -21,7 +21,6 @@ class WeatherButton: UIButton {
         path.addLine(to: endingPoint)
         path.lineWidth = 1.0
 
-        //  tintColor.setStroke()
         UIColor.white.setStroke()
         path.stroke()
     }

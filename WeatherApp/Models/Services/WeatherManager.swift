@@ -18,7 +18,7 @@ class WeatherManager {
     let request = URLRequest(url: URL(string: url)!)
     let task = URLSession.shared.dataTask(with: request) {(data: Data?, _: URLResponse?, error: Error?) in
     var weathersArray: [WeathersModel] = []
-
+        print(weathersArray, "Worried")
     if let data = data {
 
         do {
@@ -28,6 +28,7 @@ class WeatherManager {
             }catch {
                     print(error.localizedDescription)
                     }
+            print(weathersArray, "Hello use the key")
             completion(weathersArray)
             }
         }

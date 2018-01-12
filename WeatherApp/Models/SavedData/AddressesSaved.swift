@@ -1,5 +1,5 @@
 //
-//  SavedAddresses.swift
+//  AddressesSaved.swift
 //  WeatherApp
 //
 //  Created by Ade Adegoke on 15/12/2017.
@@ -10,44 +10,49 @@ import Foundation
 import CoreData
 import UIKit
 
-class SavedAddresses {
+class AddressesSaved {
    
-    static let shared = SavedAddresses()
+    static let shared = AddressesSaved()
     static let didUpdate: String = "CoreDataDidUpdateAddresses"
     
     private var addresses = [String]()
+  
+    private var address = [AddressWithCoordinate]()
     
-    func addressesFromCoreData() -> [String] {
-        if addresses.isEmpty {
-           addresses = loadAddressesFromCoreData()
+    
+    func addressesFromCoreData() -> [AddressWithCoordinate] {
         
-        } else {
-            addresses[0] = "No saved searches"
-            addresses[1] = "No saved searches"
+        if address.isEmpty {
+            address = loadAddressesFromCoreData()
         }
-        return addresses
+        return address
     }
-    
-    private func loadAddressesFromCoreData() -> [String] {
+
+
+    private func loadAddressesFromCoreData() -> [AddressWithCoordinate] {
         let appDel = UIApplication.shared.delegate as! AppDelegate
         let context = appDel.persistentContainer.viewContext
-        var loadedaddresses = [String]()
-        
+        var loadedaddress = [AddressWithCoordinate]()
+
         do {
+
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Locations")
             let results = try context.fetch(request)
             if results.count > 0 {
                 for item in results as! [NSManagedObject] {
-                    if let name = item.value(forKey: "address") as? String {
-                        self.addresses.insert(name, at: 0)
-                        loadedaddresses.append(name)
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: SavedAddresses.didUpdate), object: self)
+                    if let address = item.value(forKey: "address") as? String, let latitude = item.value(forKey: "latitude") as? Double, let longitude = item.value(forKey: "longitude") as? Double {
+                        let coordinate: Coordinate = (latitude, longitude)
+                        let addressWithCoordinate = (address, coordinate)
+                        self.address.insert(addressWithCoordinate, at: 0)
+                        loadedaddress.insert((addressWithCoordinate), at: 0)
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: AddressesSaved.didUpdate), object: self)
                     }
                 }
             }
         } catch {
             print("there are issues")
         }
-        return loadedaddresses 
+        return loadedaddress
     }
 }

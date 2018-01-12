@@ -10,254 +10,146 @@ import CoreLocation
 import UIKit
 import GoogleMaps
 
-//protocol SendUserLocation {
-//    func locationFromVC(location: String)
-//}
-
 class EnterLocationViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
-
+    
     @IBOutlet weak private var scrollView: UIScrollView!
-    @IBOutlet weak private var cancelButtonOutlet: UIButton!
+    @IBOutlet weak private var cancelButton: UIButton!
     @IBOutlet weak private var searchButtonOne: UIButton!
     @IBOutlet weak private var searchButtonTwo: UIButton!
     @IBOutlet weak private var blueBackgroundView: UIView!
-    @IBOutlet weak private var whatLocationLabel: UILabel!
     @IBOutlet weak private var locationMapView: GMSMapView!
-    @IBOutlet weak private var searchButtonOutlet: UIButton!
     @IBOutlet weak private var userEnteredLocation: UITextField!
-    @IBOutlet weak private var useCurrentLocationOutlet: UILabel!
-    @IBOutlet weak private var useCurrentLocButt: UIButton!
-
-    var revievedSavedLocation = [String]()
-    var locationSavedOne: String = ""
-    var userLatitude: String = ""
-    var userLongitude: String = ""
-    var address: String = ""
-    var area: String = ""
-
-    private let locationManager = CLLocationManager()
-    private var userCurrentLocation: String?
+    private var addressesFromCoreData = AddressesSaved().addressesFromCoreData()
     private let reachability = Reachability()!
-   // var sendUserLocationDelegate: SendUserLocation!
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set up for getting the current users location
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-
-        // Do any additional setup after loading the view.
+        updateViewForLocation()
         userEnteredLocation.delegate = self
         userEnteredLocation.borderStyle = .none
         userEnteredLocation.backgroundColor = UIColor.white
-        userEnteredLocation.layer.cornerRadius = 8.0
-
+        userEnteredLocation.layer.cornerRadius = 7.5
         blueBackgroundView.layer.cornerRadius = 10.0
         blueBackgroundView.backgroundColor = UIColor.weatherBlue
-        cancelButtonOutlet.frame.origin.x = 373
-
-        if revievedSavedLocation.count == 0 {
-        searchButtonOne.setTitle("No saved searches", for: .normal)
-        } else {
-            searchButtonOne.setTitle(revievedSavedLocation[0], for: .normal)
-        }
-        if revievedSavedLocation.count <= 1 {
-           searchButtonTwo.setTitle("", for: .normal)
-        } else {
-            searchButtonTwo.setTitle(revievedSavedLocation[1], for: .normal)
-        }
-
-        // setting the background view with google maps
-        DispatchQueue.main.async {
         
-        guard let latitude = Double(self.userLatitude) else {return}
-        guard let longitude = Double(self.userLongitude) else {return}
+        NotificationCenter.default.addObserver(self, selector: #selector(self.locationDidUpdate), name: Notification.Name(rawValue: LocationService.didUpdate), object: nil)
         
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 15.0)
-            
+        if addressesFromCoreData.count == 0 {
+            searchButtonOne.setTitle("No saved searches", for: .normal)
+        } else {
+            searchButtonOne.setTitle(addressesFromCoreData[0].address, for: .normal)
+        }
+        if addressesFromCoreData.count <= 1 {
+            searchButtonTwo.setTitle("", for: .normal)
+        } else {
+            searchButtonTwo.setTitle(addressesFromCoreData[1].address, for: .normal)
+        }
+      
+    }
+
+    @objc func locationDidUpdate(notification: Notification) {
+       updateViewForLocation()
+    }
+   
+    private func updateViewForLocation() {
+        guard let coordinate = LocationService.shared.currentCoordinate else {
+            return }
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15.0)
+        self.locationMapView.moveCamera(GMSCameraUpdate.setCamera(camera))
         let marker = GMSMarker()
         marker.position = camera.target
         marker.appearAnimation = .pop
-
-        marker.title = self.address
-        marker.snippet = self.area
+        marker.title = LocationService.shared.usersLocality
+        marker.snippet = LocationService.shared.usersArea
         marker.map = self.locationMapView
-        self.locationMapView.moveCamera(GMSCameraUpdate.setCamera(camera))
     }
-}
-
-func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    searchKeyTriggered()
-    self.scrollView.contentOffset.y = -200
-    textField.resignFirstResponder()
-    return true
-}
-   
     
-func textFieldDidBeginEditing(_ textField: UITextField) {
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+       searchKeyTriggered()
+    UIView.animate(withDuration: 0.4, animations: { self.scrollView.contentOffset.y = 0 })
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.scrollView.contentOffset.y = +170
+        })
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
     UIView.animate(withDuration: 0.4, animations: {
-    self.scrollView.contentOffset.y = 220
-    self.cancelButtonOutlet.frame.origin.x = 280
-    self.userEnteredLocation.frame = CGRect(x: 15, y: 16, width: 266, height: 35)
+      self.scrollView.contentOffset.y = 0
     })
-}
-
-func textFieldDidEndEditing(_ textField: UITextField) {
-    self.scrollView.contentOffset.y = -200
     textField.resignFirstResponder()
-}
-
-func alertView(title: String, message: String) {
-    let title = title
-    let message = message
+    }
     
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    self.present(alertController, animated: true, completion: nil)
-    
-    let defaultAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    alertController.addAction(defaultAction)
-}
-
-
-@IBAction func cancelButtonAction(_ sender: UIButton) {
-    UIView.animate(withDuration: 0.4, animations: {
-        self.cancelButtonOutlet.frame.origin.x = 373
-        self.blueBackgroundView.frame.origin.y = 425
-        self.userEnteredLocation.layer.cornerRadius = 4.0
-        self.userEnteredLocation.frame = CGRect(x: 15, y: 16, width: 327, height: 35)
-    })
+    @IBAction func cancelButtonAction(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.scrollView.contentOffset.y = -0
+        })
         self.userEnteredLocation.resignFirstResponder()
         self.userEnteredLocation.text = ""
-}
-
-func searchKeyTriggered() {
-
-    if userEnteredLocation.text == "" {
-        alertView(title: "Empty Textfield!", message: "Please enter an address.")
-    } else {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(userEnteredLocation.text!) { (placemarks, _) in
-            guard let placemark = placemarks?.first?.location else {return}
-            let lat = String(placemark.coordinate.latitude)
-            let long = String(placemark.coordinate.longitude)
-            let enteredLatLong = lat + "," + long
-
-            // Core Data. saving user searched information
-            let appDel = UIApplication.shared.delegate as! AppDelegate
-            let context = appDel.persistentContainer.viewContext
-
-            let newLocation = NSEntityDescription.insertNewObject(forEntityName: "Locations", into: context)
-            newLocation.setValue(self.userEnteredLocation.text, forKey: "address")
-            do {
-                try context.save()
-            } catch {
-                print("It did not save")
-            }
-            let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "weatherVController") as! ViewController
-            secondVC.usersLocation = enteredLatLong
-            secondVC.userLatitude = lat
-            secondVC.userLongitude = long
-
+    }
+    
+    func checkOnlineConnection(address: Coordinate) {
+        guard let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "weatherVController") as? ViewController else {return}
+        
+        let lat = String(address.latitude); let long = String(address.longitude)
+        secondVC.queryLocation = address
+        secondVC.queryString = lat + "," + long
+        print(address, "checkOnlineConnection()")
             DispatchQueue.main.async {
                 if self.reachability.connection == .wifi {
-
                     self.present(secondVC, animated: true, completion: nil)
                 } else if self.reachability.connection == .cellular {
                     self.present(secondVC, animated: true, completion: nil)
                 } else {
-                    self.alertView(title: "Online Connnection!", message: "Your mobile device is currently not online.")
-                }
+                    self.presentAlert(title: "Online Connnection!", message: "Your mobile device is currently not online.")
             }
         }
     }
-}
-
-@IBAction func usersSavedLocationNoOne(_ sender: UIButton) {
-    if searchButtonOne.currentTitle == "No saved searches" {
-        print("do something")
-    } else {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(revievedSavedLocation[0]) { (placemarks, _) in
-            guard let placemark = placemarks?.first?.location else {return}
-            let lat = String(placemark.coordinate.latitude)
-            let long = String(placemark.coordinate.longitude)
-
-            if lat.isEmpty {
-                print("Sorry this address is unknown")
-                // return
-            } else {
-                let latLong = lat + "," + long
-                let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "weatherVController") as! ViewController
-                secondVC.usersLocation = latLong
-                secondVC.userLatitude = lat
-                secondVC.userLongitude = long
-                DispatchQueue.main.async {
-                    if self.reachability.connection == .wifi {
-                        self.present(secondVC, animated: true, completion: nil)
-                    } else if self.reachability.connection == .cellular {
-                        self.present(secondVC, animated: true, completion: nil)
-                    } else {
-                       self.alertView(title: "Online Connnection!", message: "Your mobile device is currently not online.")
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-@IBAction func usersSavedLocationNoTwo(_ sender: UIButton) {
-    if searchButtonOne.currentTitle == "No saved searches" {
-        print("do something")
-    } else {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(revievedSavedLocation[1]) { (placemarks, _) in
-            guard let placemark = placemarks?.first?.location else {return}
-            let lat = String(placemark.coordinate.latitude)
-            let long = String(placemark.coordinate.longitude)
-            if lat.isEmpty {
-                print("Sorry this address is unknown")
-            } else {
-                let latLong = lat + "," + long
-                print(" this is \(latLong)")
-                let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "weatherVController") as! ViewController
-                secondVC.usersLocation = latLong
-                secondVC.userLatitude = lat
-                secondVC.userLongitude = long
-                DispatchQueue.main.async {
-                    if self.reachability.connection == .wifi {
-                        self.present(secondVC, animated: true, completion: nil)
-                    } else if self.reachability.connection == .cellular {
-                        self.present(secondVC, animated: true, completion: nil)
-                    } else {
-                       self.alertView(title: "Online Connnection!", message: "Your mobile device is currently not online.")
-                    }
-                }
-            }
-        }
-    }
-}
-
-@IBAction func usersCurrentLocation(_ sender: Any) {
-         let userLocation = self.userLatitude + "," + "" + self.userLongitude
     
+    func searchKeyTriggered() {
+        if userEnteredLocation.text == "" {
+            presentAlert(title: "Empty Textfield!", message: "Please enter an address.")
+        } else {
+        guard let enterAddress = self.userEnteredLocation.text else {return}
+           
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(enterAddress) { (placemarks, error) in
+            if error != nil {
+                self.userEnteredLocation.text = ""
+                self.presentAlert(title: "Unknown location!", message: "Please enter another location.")
+            }
+            guard let placemark = placemarks?.first?.location else {return}
+            let addressCoordinte: Coordinate = (placemark.coordinate.latitude, placemark.coordinate.longitude)
+            let addressAndLatLong: AddressWithCoordinate = (enterAddress, addressCoordinte)
+                SavingAddress.shared.savingAddressToCoreData(save: addressAndLatLong)
+                self.checkOnlineConnection(address: addressAndLatLong.coordinate)
+            }
+        }
+    }
+    
+    @IBAction func usersSavedLocationNoOne(_ sender: UIButton) {
+        self.checkOnlineConnection(address:addressesFromCoreData[0].coordinate)
+    }
+    
+    @IBAction func usersSavedLocationNoTwo(_ sender: UIButton) {
+        self.checkOnlineConnection(address:addressesFromCoreData[1].coordinate)
+    }
+   
+    @IBAction func usersCurrentLocation(_ sender: Any) {
+        guard let coordinate = LocationService.shared.currentCoordinate else {return }
+        self.checkOnlineConnection(address: coordinate)
+        print(coordinate, "usersCurrentLocation()")
         if let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "weatherVController") as? ViewController {
-        
-        secondVC.usersLocation =  userLocation
-        secondVC.userLatitude = self.userLatitude
-        secondVC.userLongitude = self.userLongitude
-            
-        DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 if self.reachability.connection == .wifi {
                     self.present(secondVC, animated: true, completion: nil)
                 } else if self.reachability.connection == .cellular {
                     self.present(secondVC, animated: true, completion: nil)
                 } else {
-                    self.alertView(title: "Online Connnection!", message: "Your mobile device is currently not online.")
+                    self.presentAlert(title: "Online Connnection!", message: "Your mobile device is currently not online.")
                 }
             }
         }

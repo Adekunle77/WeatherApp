@@ -85,15 +85,21 @@
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTj-Ui-i8h" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="736" id="05Z-Bu-Ahh"/>
+                                </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sO5-Z9-NQB">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sO5-Z9-NQB">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O4Z-pq-dvC">
-                                        <rect key="frame" x="10" y="550" width="394" height="168"/>
+                                        <rect key="frame" x="10" y="477" width="394" height="168"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7WT-ak-CSi" customClass="WeatherButton" customModule="WeatherApp" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="86" width="374" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="2Wd-LN-yI0"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,6 +110,9 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xoG-Gz-9xs" customClass="WeatherButton" customModule="WeatherApp" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="45" width="374" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="uA3-Qx-Z60"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal" title="Use current location">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -114,6 +123,9 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7t-Dl-VmW" customClass="WeatherButton" customModule="WeatherApp" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="127" width="374" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="xRA-ZK-woW"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -123,9 +135,9 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Search location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CHT-mt-tI2">
-                                                <rect key="frame" x="10" y="4" width="374" height="36"/>
+                                                <rect key="frame" x="10" y="6" width="318" height="34"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="rWw-kn-lPZ"/>
+                                                    <constraint firstAttribute="height" constant="34" id="rWw-kn-lPZ"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
@@ -138,6 +150,9 @@
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQc-zF-4w9">
                                                 <rect key="frame" x="333" y="6" width="51" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="j5k-tP-gWT"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                                 <state key="normal" title="Cancel">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -149,50 +164,51 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.58452662678163159" green="0.78617300415540481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="MQc-zF-4w9" firstAttribute="leading" secondItem="CHT-mt-tI2" secondAttribute="trailing" constant="-51" id="970-Dz-xpx"/>
-                                            <constraint firstAttribute="height" constant="168" id="IXn-iE-wnF"/>
-                                            <constraint firstItem="CHT-mt-tI2" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="Jr5-Lh-5X5"/>
-                                            <constraint firstItem="CHT-mt-tI2" firstAttribute="top" secondItem="O4Z-pq-dvC" secondAttribute="top" constant="4" id="OdZ-cM-mvj"/>
-                                            <constraint firstAttribute="trailing" secondItem="7WT-ak-CSi" secondAttribute="trailing" constant="10" id="PkK-rz-h4A"/>
-                                            <constraint firstAttribute="bottom" secondItem="Y7t-Dl-VmW" secondAttribute="bottom" constant="5" id="Q7E-bm-7yd"/>
+                                            <constraint firstItem="MQc-zF-4w9" firstAttribute="bottom" secondItem="CHT-mt-tI2" secondAttribute="bottom" id="0Py-0n-BNI"/>
+                                            <constraint firstAttribute="trailing" secondItem="Y7t-Dl-VmW" secondAttribute="trailing" constant="10" id="6BJ-vM-Xc5"/>
+                                            <constraint firstItem="MQc-zF-4w9" firstAttribute="leading" secondItem="CHT-mt-tI2" secondAttribute="trailing" constant="5" id="970-Dz-xpx"/>
+                                            <constraint firstItem="Y7t-Dl-VmW" firstAttribute="leading" secondItem="xoG-Gz-9xs" secondAttribute="leading" id="KY8-0y-pBR"/>
+                                            <constraint firstItem="Y7t-Dl-VmW" firstAttribute="trailing" secondItem="7WT-ak-CSi" secondAttribute="trailing" id="Lpe-TC-70K"/>
                                             <constraint firstItem="xoG-Gz-9xs" firstAttribute="top" secondItem="CHT-mt-tI2" secondAttribute="bottom" constant="5" id="QL0-m7-4bv"/>
                                             <constraint firstItem="Y7t-Dl-VmW" firstAttribute="top" secondItem="7WT-ak-CSi" secondAttribute="bottom" constant="5" id="RDI-Jy-7PS"/>
-                                            <constraint firstItem="xoG-Gz-9xs" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="VXY-lt-kxf"/>
-                                            <constraint firstAttribute="trailing" secondItem="CHT-mt-tI2" secondAttribute="trailing" constant="10" id="aaM-hv-Od8"/>
-                                            <constraint firstItem="7WT-ak-CSi" firstAttribute="top" secondItem="xoG-Gz-9xs" secondAttribute="bottom" constant="5" id="dKd-37-xeY"/>
-                                            <constraint firstItem="Y7t-Dl-VmW" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="fwI-Mf-uig"/>
-                                            <constraint firstAttribute="trailing" secondItem="Y7t-Dl-VmW" secondAttribute="trailing" constant="10" id="jb4-Vd-cfl"/>
-                                            <constraint firstAttribute="trailing" secondItem="xoG-Gz-9xs" secondAttribute="trailing" constant="10" id="jmM-2o-7q9"/>
-                                            <constraint firstAttribute="trailing" secondItem="MQc-zF-4w9" secondAttribute="trailing" constant="10" id="obP-3V-Gdy"/>
-                                            <constraint firstItem="MQc-zF-4w9" firstAttribute="top" secondItem="O4Z-pq-dvC" secondAttribute="top" constant="6" id="wiB-ih-cUb"/>
-                                            <constraint firstItem="7WT-ak-CSi" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="wtO-A8-R8a"/>
+                                            <constraint firstItem="Y7t-Dl-VmW" firstAttribute="leading" secondItem="CHT-mt-tI2" secondAttribute="leading" id="goJ-Pc-OEB"/>
+                                            <constraint firstAttribute="bottom" secondItem="Y7t-Dl-VmW" secondAttribute="bottom" constant="5" id="hoH-az-FOh"/>
+                                            <constraint firstItem="Y7t-Dl-VmW" firstAttribute="trailing" secondItem="xoG-Gz-9xs" secondAttribute="trailing" id="hvJ-Bj-Q3Z"/>
+                                            <constraint firstItem="Y7t-Dl-VmW" firstAttribute="trailing" secondItem="CHT-mt-tI2" secondAttribute="trailing" constant="56" id="jpA-w9-d07"/>
+                                            <constraint firstAttribute="trailing" secondItem="MQc-zF-4w9" secondAttribute="trailing" constant="10" id="l85-gO-NQC"/>
+                                            <constraint firstItem="Y7t-Dl-VmW" firstAttribute="leading" secondItem="O4Z-pq-dvC" secondAttribute="leading" constant="10" id="qCD-Al-ixo"/>
+                                            <constraint firstItem="7WT-ak-CSi" firstAttribute="top" secondItem="xoG-Gz-9xs" secondAttribute="bottom" constant="5" id="tZh-qL-ZCh"/>
+                                            <constraint firstAttribute="height" constant="168" id="vEF-R6-Zpp"/>
+                                            <constraint firstItem="Y7t-Dl-VmW" firstAttribute="leading" secondItem="7WT-ak-CSi" secondAttribute="leading" id="ykR-W7-kNz"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="O4Z-pq-dvC" secondAttribute="trailing" constant="10" id="H04-bv-Wo0"/>
-                                    <constraint firstItem="O4Z-pq-dvC" firstAttribute="centerX" secondItem="sO5-Z9-NQB" secondAttribute="centerX" id="XAM-WI-bTO"/>
-                                    <constraint firstItem="O4Z-pq-dvC" firstAttribute="leading" secondItem="sO5-Z9-NQB" secondAttribute="leading" constant="10" id="fKy-I0-hW0"/>
-                                    <constraint firstItem="O4Z-pq-dvC" firstAttribute="top" secondItem="sO5-Z9-NQB" secondAttribute="top" constant="550" id="rZi-N3-Mcf"/>
-                                    <constraint firstAttribute="bottom" secondItem="O4Z-pq-dvC" secondAttribute="bottom" constant="18" id="tXA-qx-MbO"/>
+                                    <constraint firstItem="O4Z-pq-dvC" firstAttribute="leading" secondItem="sO5-Z9-NQB" secondAttribute="leading" constant="10" id="Dlu-8L-uCM"/>
+                                    <constraint firstAttribute="trailing" secondItem="O4Z-pq-dvC" secondAttribute="trailing" constant="10" id="riG-xB-veN"/>
+                                    <constraint firstItem="O4Z-pq-dvC" firstAttribute="centerX" secondItem="sO5-Z9-NQB" secondAttribute="centerX" id="vZW-fa-Kk8"/>
+                                    <constraint firstItem="O4Z-pq-dvC" firstAttribute="centerY" secondItem="sO5-Z9-NQB" secondAttribute="centerY" constant="193" id="wLW-67-kjH"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="O4Z-pq-dvC" secondAttribute="bottom" constant="-1" id="zTp-5J-q4y"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="leading" secondItem="sTj-Ui-i8h" secondAttribute="leading" id="5ZQ-41-PVa"/>
+                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="top" secondItem="sTj-Ui-i8h" secondAttribute="top" id="2UU-u7-zyv"/>
                             <constraint firstAttribute="trailing" secondItem="sTj-Ui-i8h" secondAttribute="trailing" id="HAA-48-ewt"/>
-                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="top" secondItem="sTj-Ui-i8h" secondAttribute="top" id="R6E-J7-Pwq"/>
+                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="trailing" secondItem="sTj-Ui-i8h" secondAttribute="trailing" id="Ial-bU-sUH"/>
+                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="leading" secondItem="sTj-Ui-i8h" secondAttribute="leading" id="N17-zN-Rnd"/>
                             <constraint firstItem="sTj-Ui-i8h" firstAttribute="leading" secondItem="uMY-3t-a2i" secondAttribute="leading" id="T62-J7-cpr"/>
+                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="leading" secondItem="uMY-3t-a2i" secondAttribute="leading" id="Yfb-Xl-QwU"/>
                             <constraint firstItem="sTj-Ui-i8h" firstAttribute="top" secondItem="uMY-3t-a2i" secondAttribute="top" id="abF-8E-Sbs"/>
-                            <constraint firstItem="mc4-GG-B2x" firstAttribute="top" secondItem="sTj-Ui-i8h" secondAttribute="bottom" id="hIG-vn-oMg"/>
-                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="trailing" secondItem="sTj-Ui-i8h" secondAttribute="trailing" id="oTG-Mf-CGE"/>
-                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="bottom" secondItem="mc4-GG-B2x" secondAttribute="top" id="yCc-tb-X9J"/>
+                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="top" secondItem="uMY-3t-a2i" secondAttribute="top" id="bGy-tx-lRf"/>
+                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="width" secondItem="uMY-3t-a2i" secondAttribute="width" id="ljG-zr-r3A"/>
+                            <constraint firstItem="sO5-Z9-NQB" firstAttribute="height" secondItem="uMY-3t-a2i" secondAttribute="height" id="pjz-OQ-1xu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="blueBackgroundView" destination="O4Z-pq-dvC" id="9BV-O9-947"/>
-                        <outlet property="cancelButtonOutlet" destination="MQc-zF-4w9" id="TDr-aW-aGb"/>
+                        <outlet property="cancelButton" destination="MQc-zF-4w9" id="TDr-aW-aGb"/>
                         <outlet property="locationMapView" destination="sTj-Ui-i8h" id="Jnb-xr-z74"/>
                         <outlet property="scrollView" destination="sO5-Z9-NQB" id="m4e-en-jvZ"/>
                         <outlet property="searchButtonOne" destination="7WT-ak-CSi" id="0Ep-XC-tCe"/>
@@ -212,7 +228,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="321.73913043478262" y="-702.71739130434787"/>
+            <point key="canvasLocation" x="313.04347826086956" y="-704.34782608695662"/>
         </scene>
         <!--The Weather App-->
         <scene sceneID="tne-QT-ifu">
@@ -240,7 +256,7 @@
                                     <action selector="searchAgain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y4Z-3s-agm"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f0N-kO-a4h">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f0N-kO-a4h">
                                 <rect key="frame" x="0.0" y="509" width="414" height="216"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -292,7 +308,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1061.5999999999999" y="-700.29985007496259"/>
+            <point key="canvasLocation" x="1131.8840579710145" y="-703.53260869565224"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KSs-5n-xzz">
@@ -317,6 +333,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LPP-Ro-BZI"/>
-        <segue reference="Bzs-f7-ARF"/>
+        <segue reference="bFx-6K-crF"/>
     </inferredMetricsTieBreakers>
 </document>

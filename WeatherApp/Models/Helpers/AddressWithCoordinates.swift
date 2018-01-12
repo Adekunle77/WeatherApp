@@ -7,3 +7,5 @@
 //
 
 import Foundation
+
+typealias AddressWithCoordinate = (address: String, coordinate: Coordinate)

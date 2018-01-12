@@ -31,8 +31,6 @@ extension UIColor {
             green: (hex >> 8) & 0xFF,
             blue: hex & 0xFF,
             alp: alp
-            
         )
-        
     }
 }
